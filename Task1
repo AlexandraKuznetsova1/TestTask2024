@@ -1,0 +1,33 @@
+import random
+
+
+def solve(array_one, array_two): #функция, принимающая на вход 2 списка
+    a = len(array_one) #вводим длину первого списка
+    b = len(array_two) #вводим длину второго списка
+    res = [0] * (a + b) #итоговый список по убыванию
+
+    i = 0
+    a -= 1 #значение длины каждого списка уменьшаем на 1,так как далее будем использовать его как индекс элемента, а индексы начинаются с 0
+    b -= 1 #то же самое
+    while a >= 0 or b >= 0: #пока списки не пустые, у них есть какая-то длина
+        if a < 0 or (b >= 0 and array_one[a] <= array_two[b]): #если список 1 закончился, а список 2 еще нет и при этом последний элемент списка 1 меньше посл элемента списка 2
+            res[i] = array_two[b] #то в текущий результат записывается последнее значение списка 2
+            b -= 1 #уменьшаем длину списка 2
+        else:
+            res[i] = array_one[a] #иначе запишем значение списка 1
+            a -= 1 #уменьшаем длину списка 1
+        i += 1 #двигаемся по списку и возвращаем результат
+    return res
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    a = int(input())
+    b = int(input())
+    array_one = [1 + 2 * i for i in range(a)]
+    array_two = [2 + 2 * i for i in range(b)]
+
+    print("array_a:", *array_one)
+    print("array_b:", *array_two)
+    print("res:", *solve(array_one, array_two))
+
